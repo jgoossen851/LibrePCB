@@ -34,7 +34,6 @@
      <widget class="QLabel" name="lblRemoteLibraryWarning">
       <property name="font">
        <font>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -79,7 +78,7 @@
      <x>0</x>
      <y>0</y>
      <width>611</width>
-     <height>19</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -274,6 +273,7 @@
    <addaction name="actionDrawLine"/>
    <addaction name="actionDrawRect"/>
    <addaction name="actionDrawPolygon"/>
+   <addaction name="actionDrawArc"/>
    <addaction name="actionDrawCircle"/>
    <addaction name="actionAddName"/>
    <addaction name="actionAddValue"/>
@@ -802,6 +802,18 @@
    </property>
    <property name="toolTip">
     <string>Export as image file</string>
+   </property>
+  </action>
+  <action name="actionDrawArc">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/img/actions/draw_arc.png</normaloff>:/img/actions/draw_arc.png</iconset>
+   </property>
+   <property name="text">
+    <string>Draw Arc</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
  </widget>
