@@ -68,6 +68,7 @@ public:
     const IF_GraphicsLayerProvider& layerProvider;
     bool elementIsNewlyCreated;
     bool readOnly;
+    QStatusBar& statusBar;
   };
 
   enum Tool {

@@ -90,6 +90,7 @@ public:  // Types
     std::shared_ptr<Footprint> currentFootprint;
     std::shared_ptr<FootprintGraphicsItem> currentGraphicsItem;
     ToolBarProxy& commandToolBar;
+    QStatusBar& statusBar;
   };
 
 public:

@@ -90,7 +90,7 @@
       <string>&amp;Import</string>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="../../../../img/images.qrc">
        <normaloff>:/img/actions/import.png</normaloff>:/img/actions/import.png</iconset>
      </property>
      <addaction name="actionImportDxf"/>
@@ -101,7 +101,7 @@
       <string>&amp;Export</string>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="../../../../img/images.qrc">
        <normaloff>:/img/actions/export.png</normaloff>:/img/actions/export.png</iconset>
      </property>
      <addaction name="separator"/>
@@ -287,11 +287,14 @@
   </widget>
   <action name="actionAbout">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/info.png</normaloff>:/img/actions/info.png</iconset>
    </property>
    <property name="text">
     <string>&amp;About LibrePCB</string>
+   </property>
+   <property name="statusTip">
+    <string>sdfsdf</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -313,7 +316,7 @@
   </action>
   <action name="actionClose">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/close.png</normaloff>:/img/actions/close.png</iconset>
    </property>
    <property name="text">
@@ -325,7 +328,7 @@
   </action>
   <action name="actionNew">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/new_2.png</normaloff>:/img/actions/new_2.png</iconset>
    </property>
    <property name="text">
@@ -337,7 +340,7 @@
   </action>
   <action name="actionSave">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/save.png</normaloff>:/img/actions/save.png</iconset>
    </property>
    <property name="text">
@@ -349,7 +352,7 @@
   </action>
   <action name="actionUndo">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/undo.png</normaloff>:/img/actions/undo.png</iconset>
    </property>
    <property name="text">
@@ -361,7 +364,7 @@
   </action>
   <action name="actionRedo">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/redo.png</normaloff>:/img/actions/redo.png</iconset>
    </property>
    <property name="text">
@@ -373,7 +376,7 @@
   </action>
   <action name="actionAbortCommand">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/stop.png</normaloff>:/img/actions/stop.png</iconset>
    </property>
    <property name="text">
@@ -385,7 +388,7 @@
   </action>
   <action name="actionZoomIn">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/zoom_in.png</normaloff>:/img/actions/zoom_in.png</iconset>
    </property>
    <property name="text">
@@ -397,7 +400,7 @@
   </action>
   <action name="actionZoomOut">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/zoom_out.png</normaloff>:/img/actions/zoom_out.png</iconset>
    </property>
    <property name="text">
@@ -409,7 +412,7 @@
   </action>
   <action name="actionZoomAll">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/zoom_all.png</normaloff>:/img/actions/zoom_all.png</iconset>
    </property>
    <property name="text">
@@ -421,7 +424,7 @@
   </action>
   <action name="actionRotateCcw">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/rotate_left.png</normaloff>:/img/actions/rotate_left.png</iconset>
    </property>
    <property name="text">
@@ -433,7 +436,7 @@
   </action>
   <action name="actionRotateCw">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/rotate_right.png</normaloff>:/img/actions/rotate_right.png</iconset>
    </property>
    <property name="text">
@@ -445,7 +448,7 @@
   </action>
   <action name="actionCopy">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/copy.png</normaloff>:/img/actions/copy.png</iconset>
    </property>
    <property name="text">
@@ -457,7 +460,7 @@
   </action>
   <action name="actionCut">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/cut.png</normaloff>:/img/actions/cut.png</iconset>
    </property>
    <property name="text">
@@ -469,7 +472,7 @@
   </action>
   <action name="actionPaste">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/paste.png</normaloff>:/img/actions/paste.png</iconset>
    </property>
    <property name="text">
@@ -481,7 +484,7 @@
   </action>
   <action name="actionRemove">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/delete.png</normaloff>:/img/actions/delete.png</iconset>
    </property>
    <property name="text">
@@ -493,7 +496,7 @@
   </action>
   <action name="actionToolSelect">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/select.png</normaloff>:/img/actions/select.png</iconset>
    </property>
    <property name="text">
@@ -505,7 +508,7 @@
   </action>
   <action name="actionAddSymbolPin">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/add_symbol_pin.png</normaloff>:/img/actions/add_symbol_pin.png</iconset>
    </property>
    <property name="text">
@@ -517,7 +520,7 @@
   </action>
   <action name="actionAddThtPad">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/add_tht_pad.png</normaloff>:/img/actions/add_tht_pad.png</iconset>
    </property>
    <property name="text">
@@ -529,7 +532,7 @@
   </action>
   <action name="actionAddSmtPad">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/add_smt_pad.png</normaloff>:/img/actions/add_smt_pad.png</iconset>
    </property>
    <property name="text">
@@ -541,7 +544,7 @@
   </action>
   <action name="actionDrawLine">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/draw_line.png</normaloff>:/img/actions/draw_line.png</iconset>
    </property>
    <property name="text">
@@ -553,7 +556,7 @@
   </action>
   <action name="actionAddText">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/add_text.png</normaloff>:/img/actions/add_text.png</iconset>
    </property>
    <property name="text">
@@ -565,7 +568,7 @@
   </action>
   <action name="actionDrawPolygon">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/draw_polygon.png</normaloff>:/img/actions/draw_polygon.png</iconset>
    </property>
    <property name="text">
@@ -577,7 +580,7 @@
   </action>
   <action name="actionDrawCircle">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/draw_circle.png</normaloff>:/img/actions/draw_circle.png</iconset>
    </property>
    <property name="text">
@@ -592,7 +595,7 @@
   </action>
   <action name="actionAddHole">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/add_hole.png</normaloff>:/img/actions/add_hole.png</iconset>
    </property>
    <property name="text">
@@ -604,7 +607,7 @@
   </action>
   <action name="actionGridProperties">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/grid.png</normaloff>:/img/actions/grid.png</iconset>
    </property>
    <property name="text">
@@ -616,7 +619,7 @@
   </action>
   <action name="actionDrawRect">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/draw_rectangle.png</normaloff>:/img/actions/draw_rectangle.png</iconset>
    </property>
    <property name="text">
@@ -628,7 +631,7 @@
   </action>
   <action name="actionRescanLibraries">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/refresh.png</normaloff>:/img/actions/refresh.png</iconset>
    </property>
    <property name="text">
@@ -640,7 +643,7 @@
   </action>
   <action name="actionRemoveElement">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/delete.png</normaloff>:/img/actions/delete.png</iconset>
    </property>
    <property name="text">
@@ -652,7 +655,7 @@
   </action>
   <action name="actionAddName">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/add_name.png</normaloff>:/img/actions/add_name.png</iconset>
    </property>
    <property name="text">
@@ -664,7 +667,7 @@
   </action>
   <action name="actionAddValue">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/add_value.png</normaloff>:/img/actions/add_value.png</iconset>
    </property>
    <property name="text">
@@ -676,7 +679,7 @@
   </action>
   <action name="actionShowElementInFileManager">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/search.png</normaloff>:/img/actions/search.png</iconset>
    </property>
    <property name="text">
@@ -688,7 +691,7 @@
   </action>
   <action name="actionOnlineDocumentation">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/help.png</normaloff>:/img/actions/help.png</iconset>
    </property>
    <property name="text">
@@ -700,7 +703,7 @@
   </action>
   <action name="actionOpenWebsite">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/open_browser.png</normaloff>:/img/actions/open_browser.png</iconset>
    </property>
    <property name="text">
@@ -712,7 +715,7 @@
   </action>
   <action name="actionMirror">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/flip_horizontal.png</normaloff>:/img/actions/flip_horizontal.png</iconset>
    </property>
    <property name="text">
@@ -724,7 +727,7 @@
   </action>
   <action name="actionFlip">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/swap.png</normaloff>:/img/actions/swap.png</iconset>
    </property>
    <property name="text">
@@ -736,7 +739,7 @@
   </action>
   <action name="actionSelectAll">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/select_all.png</normaloff>:/img/actions/select_all.png</iconset>
    </property>
    <property name="text">
@@ -764,7 +767,7 @@
   </action>
   <action name="actionPrint">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/print.png</normaloff>:/img/actions/print.png</iconset>
    </property>
    <property name="text">
@@ -779,7 +782,7 @@
   </action>
   <action name="actionExportPdf">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/pdf.png</normaloff>:/img/actions/pdf.png</iconset>
    </property>
    <property name="text">
@@ -794,7 +797,7 @@
   </action>
   <action name="actionExportImage">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/export_pixmap.png</normaloff>:/img/actions/export_pixmap.png</iconset>
    </property>
    <property name="text">
@@ -806,7 +809,7 @@
   </action>
   <action name="actionDrawArc">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../../img/images.qrc">
      <normaloff>:/img/actions/draw_arc.png</normaloff>:/img/actions/draw_arc.png</iconset>
    </property>
    <property name="text">
@@ -831,6 +834,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../../../img/images.qrc"/>
+ </resources>
  <connections/>
 </ui>

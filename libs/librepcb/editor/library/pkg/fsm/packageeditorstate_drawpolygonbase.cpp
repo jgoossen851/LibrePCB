@@ -325,6 +325,13 @@ bool PackageEditorState_DrawPolygonBase::updateCurrentPosition(
       vertices[1] = Vertex(posOnGrid.rotated(Angle::deg180(), mArcCenter),
                            Angle::deg180());
       vertices[0] = Vertex(posOnGrid, Angle::deg180());
+      UnsignedLength radius = (posOnGrid - mArcCenter).getLength();
+      mContext.statusBar.showMessage(
+          tr("Radius:") %
+          QString(" %1%2")
+              .arg(getDefaultLengthUnit().convertToUnit(*radius), 12, 'f',
+                   getDefaultLengthUnit().getReasonableNumberOfDecimals())
+              .arg(getDefaultLengthUnit().toShortStringTr()));
     } else {
       // Now place the end point of the arc. The only degree of freedom is the
       // angle. This angle is determined by the current cursor position and
@@ -356,6 +363,11 @@ bool PackageEditorState_DrawPolygonBase::updateCurrentPosition(
         vertices.append(Vertex(arcStart.rotated(angle, mArcCenter)));
       }
       mLastAngle = angle;
+
+      mContext.statusBar.showMessage(
+          tr("Angle:") %
+          QString(" %1°")
+              .arg(angle.toDeg(), 12, 'f', 0));
     }
   } else {
     Q_ASSERT(count >= 2);

@@ -139,8 +139,15 @@ LibraryEditor::LibraryEditor(Workspace& ws, const FilePath& libFp,
   connect(mUi->actionAbout_Qt, &QAction::triggered, qApp,
           &QApplication::aboutQt);
 
+  // setup status bar
+  mUi->statusBar->setFields(StatusBar::ProgressBar);
+  mUi->statusBar->setProgressBarTextFormat(tr("Scanning libraries (%p%)"));
+  connect(&mWorkspace.getLibraryDb(), &WorkspaceLibraryDb::scanProgressUpdate,
+          mUi->statusBar, &StatusBar::setProgressBarPercent,
+          Qt::QueuedConnection);
+
   // add overview tab
-  EditorWidgetBase::Context context{mWorkspace, *this, false, readOnly};
+  EditorWidgetBase::Context context{mWorkspace, *this, false, readOnly, *mUi->statusBar};
   LibraryOverviewWidget* overviewWidget =
       new LibraryOverviewWidget(context, libFp);
   mLibrary = &overviewWidget->getLibrary();
@@ -168,13 +175,6 @@ LibraryEditor::LibraryEditor(Workspace& ws, const FilePath& libFp,
   connect(filterLineEdit, &QLineEdit::textEdited, overviewWidget,
           &LibraryOverviewWidget::setFilter);
   mUi->filterToolbar->addWidget(filterLineEdit);
-
-  // setup status bar
-  mUi->statusBar->setFields(StatusBar::ProgressBar);
-  mUi->statusBar->setProgressBarTextFormat(tr("Scanning libraries (%p%)"));
-  connect(&mWorkspace.getLibraryDb(), &WorkspaceLibraryDb::scanProgressUpdate,
-          mUi->statusBar, &StatusBar::setProgressBarPercent,
-          Qt::QueuedConnection);
 
   // if the library was opened in read-only mode, we guess that it's a remote
   // library and thus show a warning that all modifications are lost after the
@@ -571,7 +571,7 @@ void LibraryEditor::editLibraryElementTriggered(const FilePath& fp,
     }
 
     EditorWidgetBase::Context context{mWorkspace, *this, isNewElement,
-                                      mIsOpenedReadOnly};
+                                      mIsOpenedReadOnly, *mUi->statusBar};
     EditWidgetType* widget = new EditWidgetType(context, fp);
     connect(widget, &QWidget::windowTitleChanged, this,
             &LibraryEditor::updateTabTitles);

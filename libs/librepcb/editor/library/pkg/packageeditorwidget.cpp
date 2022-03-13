@@ -155,7 +155,7 @@ PackageEditorWidget::PackageEditorWidget(const Context& context,
                                        *mPackage,
                                        nullptr,
                                        nullptr,
-                                       *mCommandToolBarProxy};
+                                       *mCommandToolBarProxy, mContext.statusBar};
   mFsm.reset(new PackageEditorFsm(fsmContext));
   currentFootprintChanged(0);  // small hack to select the first footprint...
 
