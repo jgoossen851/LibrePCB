@@ -148,9 +148,7 @@ bool PackageEditorState_DrawPolygonBase::exit() noexcept {
 bool PackageEditorState_DrawPolygonBase::processGraphicsSceneMouseMoved(
     QGraphicsSceneMouseEvent& e) noexcept {
   if (mIsUndoCmdActive) {
-    Point currentPos =
-        Point::fromPx(e.scenePos()).mappedToGrid(getGridInterval());
-    return updateCurrentPosition(currentPos);
+    return updateCurrentPosition(Point::fromPx(e.scenePos()));
   } else {
     return true;
   }
@@ -308,32 +306,34 @@ bool PackageEditorState_DrawPolygonBase::addNextSegment(
 bool PackageEditorState_DrawPolygonBase::updateCurrentPosition(
     const Point& pos) noexcept {
   if ((!mCurrentPolygon) || (!mEditCmd)) return false;
+  const Point posOnGrid = pos.mappedToGrid(getGridInterval());
   QVector<Vertex> vertices = mCurrentPolygon->getPath().getVertices();
   int count = vertices.count();
   if (mMode == Mode::RECT) {
     Q_ASSERT(count >= 5);
     vertices[count - 4].setPos(
-        Point(pos.getX(), vertices[count - 5].getPos().getY()));
-    vertices[count - 3].setPos(pos);
+        Point(posOnGrid.getX(), vertices[count - 5].getPos().getY()));
+    vertices[count - 3].setPos(posOnGrid);
     vertices[count - 2].setPos(
-        Point(vertices[count - 5].getPos().getX(), pos.getY()));
+        Point(vertices[count - 5].getPos().getX(), posOnGrid.getY()));
   } else if (mMode == Mode::ARC) {
     if (!mArcInSecondState) {
       // Draw 2 arcs with 180° each to result in an accurate 360° circle.
       // This circle helps the user to place the start point of the arc.
       Q_ASSERT(count == 3);
-      vertices[2] = Vertex(pos);
-      vertices[1] =
-          Vertex(pos.rotated(Angle::deg180(), mArcCenter), Angle::deg180());
-      vertices[0] = Vertex(pos, Angle::deg180());
+      vertices[2] = Vertex(posOnGrid);
+      vertices[1] = Vertex(posOnGrid.rotated(Angle::deg180(), mArcCenter),
+                           Angle::deg180());
+      vertices[0] = Vertex(posOnGrid, Angle::deg180());
     } else {
       // Now place the end point of the arc. The only degree of freedom is the
       // angle. This angle is determined by the current cursor position and
       // the position where the cursor was before to determine the arc's
       // direction.
       Point arcStart = vertices[0].getPos();
-      Angle angle =
-          Toolbox::arcAngle(arcStart, pos, mArcCenter).mappedTo180deg();
+      Angle angle = Toolbox::arcAngle(arcStart, pos, mArcCenter)
+                        .rounded(Angle(5000000))
+                        .mappedTo180deg();
       if (((mLastAngle > Angle::deg90()) && (angle < 0)) ||
           ((mLastAngle < -Angle::deg90()) && (angle > 0))) {
         angle.invert();
@@ -359,7 +359,7 @@ bool PackageEditorState_DrawPolygonBase::updateCurrentPosition(
     }
   } else {
     Q_ASSERT(count >= 2);
-    vertices[count - 1].setPos(pos);
+    vertices[count - 1].setPos(posOnGrid);
   }
   mEditCmd->setPath(Path(vertices), true);
   return true;
