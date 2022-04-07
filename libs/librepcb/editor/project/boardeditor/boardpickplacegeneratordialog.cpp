@@ -28,6 +28,7 @@
 #include <librepcb/core/export/pickplacecsvwriter.h>
 #include <librepcb/core/fileio/csvfile.h>
 #include <librepcb/core/project/board/board.h>
+#include <librepcb/core/project/board/boardgerberexport.h>
 #include <librepcb/core/project/board/boardpickplacegenerator.h>
 #include <librepcb/core/project/project.h>
 
@@ -57,9 +58,9 @@ BoardPickPlaceGeneratorDialog::BoardPickPlaceGeneratorDialog(Board& board,
   mUi->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
   mUi->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
   mUi->edtTopFilePath->setText(
-      "./output/{{VERSION}}/assembly/{{PROJECT}}_PnP-TOP.csv");
+      "./output/{{VERSION}}/assembly/{{PROJECT}}_PnP-TOP.gbr");
   mUi->edtBottomFilePath->setText(
-      "./output/{{VERSION}}/assembly/{{PROJECT}}_PnP-BOT.csv");
+      "./output/{{VERSION}}/assembly/{{PROJECT}}_PnP-BOT.gbr");
   QPushButton* btnGenerate =
       mUi->buttonBox->addButton(tr("&Generate"), QDialogButtonBox::ActionRole);
   connect(btnGenerate, &QPushButton::clicked, this,
@@ -79,17 +80,14 @@ BoardPickPlaceGeneratorDialog::~BoardPickPlaceGeneratorDialog() {
 
 void BoardPickPlaceGeneratorDialog::btnGenerateClicked() noexcept {
   try {
-    PickPlaceCsvWriter writer(*mData);
-    writer.setIncludeMetadataComment(mUi->cbxIncludeComment->isChecked());
+    BoardGerberExport gen(mBoard);
     if (mUi->cbxTopDevices->isChecked()) {
-      writer.setBoardSide(PickPlaceCsvWriter::BoardSide::TOP);
-      writer.generateCsv()->saveToFile(
-          getOutputFilePath(mUi->edtTopFilePath->text()));  // can throw
+      gen.exportComponentLayer(BoardGerberExport::BoardSide::Top,
+                               mUi->edtTopFilePath->text());  // can throw
     }
     if (mUi->cbxBottomDevices->isChecked()) {
-      writer.setBoardSide(PickPlaceCsvWriter::BoardSide::BOTTOM);
-      writer.generateCsv()->saveToFile(
-          getOutputFilePath(mUi->edtBottomFilePath->text()));  // can throw
+      gen.exportComponentLayer(BoardGerberExport::BoardSide::Bottom,
+                               mUi->edtBottomFilePath->text());  // can throw
     }
     mUi->lblSuccess->show();
   } catch (Exception& e) {
