@@ -30,6 +30,7 @@
  ******************************************************************************/
 namespace librepcb {
 
+class Angle;
 class Uuid;
 
 /*******************************************************************************
@@ -64,6 +65,12 @@ public:
     SmdPadCopperDefined,  ///< SMT pad, copper-defined
     SmdPadSolderMaskDefined,  ///< SMT pad, stopmask-defined
     ViaPad,  ///< Via
+
+    // Available only on component layers:
+    ComponentMain,  ///< Center of component
+    ComponentPin,  ///< Component pin
+    ComponentOutlineBody,  ///< Component body outline
+    ComponentOutlineCourtyard,  ///< Component courtyard outline
   };
 
   // Constructors / Destructor
@@ -107,6 +114,8 @@ public:
                                                           int toLayer) noexcept;
   static GerberAttribute fileFunctionMixedPlating(int fromLayer,
                                                   int toLayer) noexcept;
+  static GerberAttribute fileFunctionComponent(int layer,
+                                               BoardSide side) noexcept;
   static GerberAttribute filePolarity(Polarity polarity) noexcept;
   static GerberAttribute fileMd5(const QString& md5) noexcept;
   static GerberAttribute apertureFunction(ApertureFunction function) noexcept;
@@ -116,6 +125,12 @@ public:
   static GerberAttribute objectComponent(const QString& component) noexcept;
   static GerberAttribute objectPin(const QString& component, const QString& pin,
                                    const QString& signal) noexcept;
+  static GerberAttribute componentRotation(const Angle& rotation) noexcept;
+  static GerberAttribute componentManufacturer(
+      const QString& manufacturer) noexcept;
+  static GerberAttribute componentMpn(const QString& mpn) noexcept;
+  static GerberAttribute componentValue(const QString& value) noexcept;
+  static GerberAttribute componentFootprint(const QString& footprint) noexcept;
 
 private:  // Methods
   GerberAttribute(Type type, const QString& key,

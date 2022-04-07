@@ -128,6 +128,17 @@ protected:
                   gen.flashOctagon(Point(100, 200), PositiveLength(200000),
                                    PositiveLength(100000), rot, function, net,
                                    component, pin, signal);
+
+                  gen.flashComponent(Point(100, 200), rot, component, "", "",
+                                     "", "");
+                  gen.flashComponent(Point(100, 200), rot, component, "value",
+                                     "manufacturer", "mpn", "footprint");
+
+                  gen.flashComponentPin(Point(100, 200), rot, component, "", "",
+                                        "", "", pin, signal, false);
+                  gen.flashComponentPin(Point(100, 200), rot, component,
+                                        "value", "manufacturer", "mpn",
+                                        "footprint", pin, signal, true);
                 }
               }
             }
