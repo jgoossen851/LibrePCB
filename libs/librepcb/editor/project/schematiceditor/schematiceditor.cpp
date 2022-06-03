@@ -747,7 +747,16 @@ bool SchematicEditor::graphicsViewEventHandler(QEvent* event) {
     case QEvent::KeyPress: {
       auto* e = dynamic_cast<QKeyEvent*>(event);
       Q_ASSERT(e);
-      mFsm->processKeyPressed(*e);
+      switch (e->key()) {
+        case Qt::Key_Tab:
+          if (!mCommandToolBarProxy->startTabFocusCycle(*mUi->graphicsView)) {
+            return false;  // Let other widgets handle the event.
+          }
+          break;
+        default:
+          mFsm->processKeyPressed(*e);
+          break;
+      }
       break;
     }
 

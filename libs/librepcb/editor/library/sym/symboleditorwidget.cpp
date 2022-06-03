@@ -367,6 +367,16 @@ QString SymbolEditorWidget::commitMetadata() noexcept {
 bool SymbolEditorWidget::graphicsViewEventHandler(QEvent* event) noexcept {
   Q_ASSERT(event);
   switch (event->type()) {
+    case QEvent::KeyPress: {
+      auto* e = dynamic_cast<QKeyEvent*>(event);
+      Q_ASSERT(e);
+      switch (e->key()) {
+        case Qt::Key_Tab:
+          return mCommandToolBarProxy->startTabFocusCycle(*mUi->graphicsView);
+        default:
+          return false;
+      }
+    }
     case QEvent::GraphicsSceneMouseMove: {
       auto* e = dynamic_cast<QGraphicsSceneMouseEvent*>(event);
       Q_ASSERT(e);
