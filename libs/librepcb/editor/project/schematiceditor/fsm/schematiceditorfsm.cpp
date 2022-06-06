@@ -166,27 +166,18 @@ bool SchematicEditorFsm::processPaste() noexcept {
   return false;
 }
 
-bool SchematicEditorFsm::processRotateCw() noexcept {
+bool SchematicEditorFsm::processRotate(const Angle& rotation) noexcept {
   if (SchematicEditorState* state = getCurrentStateObj()) {
-    if (state->processRotateCw()) {
+    if (state->processRotate(rotation)) {
       return true;
     }
   }
   return false;
 }
 
-bool SchematicEditorFsm::processRotateCcw() noexcept {
+bool SchematicEditorFsm::processMirror(Qt::Orientation orientation) noexcept {
   if (SchematicEditorState* state = getCurrentStateObj()) {
-    if (state->processRotateCcw()) {
-      return true;
-    }
-  }
-  return false;
-}
-
-bool SchematicEditorFsm::processMirror() noexcept {
-  if (SchematicEditorState* state = getCurrentStateObj()) {
-    if (state->processMirror()) {
+    if (state->processMirror(orientation)) {
       return true;
     }
   }
@@ -196,6 +187,15 @@ bool SchematicEditorFsm::processMirror() noexcept {
 bool SchematicEditorFsm::processRemove() noexcept {
   if (SchematicEditorState* state = getCurrentStateObj()) {
     if (state->processRemove()) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool SchematicEditorFsm::processEditProperties() noexcept {
+  if (SchematicEditorState* state = getCurrentStateObj()) {
+    if (state->processEditProperties()) {
       return true;
     }
   }

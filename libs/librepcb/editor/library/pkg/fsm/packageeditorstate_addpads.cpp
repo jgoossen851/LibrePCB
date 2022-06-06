@@ -22,6 +22,7 @@
  ******************************************************************************/
 #include "packageeditorstate_addpads.h"
 
+#include "../../../editorcommandset.h"
 #include "../../../widgets/graphicsview.h"
 #include "../../../widgets/positivelengthedit.h"
 #include "../../../widgets/unsignedlengthedit.h"
@@ -84,6 +85,7 @@ bool PackageEditorState_AddPads::entry() noexcept {
   mContext.graphicsScene.setSelectionArea(QPainterPath());  // clear selection
 
   // populate command toolbar
+  EditorCommandSet& cmd = EditorCommandSet::instance();
 
   // package pad
   mContext.commandToolBar.addLabel(tr("Package Pad:"));
@@ -102,6 +104,12 @@ bool PackageEditorState_AddPads::entry() noexcept {
     std::unique_ptr<BoardSideSelectorWidget> boardSideSelector(
         new BoardSideSelectorWidget());
     boardSideSelector->setCurrentBoardSide(mLastPad.getBoardSide());
+    boardSideSelector->addAction(cmd.layerUp.createAction(
+        boardSideSelector.get(), boardSideSelector.get(),
+        &BoardSideSelectorWidget::setBoardSideTop));
+    boardSideSelector->addAction(cmd.layerDown.createAction(
+        boardSideSelector.get(), boardSideSelector.get(),
+        &BoardSideSelectorWidget::setBoardSideBottom));
     connect(boardSideSelector.get(),
             &BoardSideSelectorWidget::currentBoardSideChanged, this,
             &PackageEditorState_AddPads::boardSideSelectorCurrentSideChanged);
@@ -152,6 +160,12 @@ bool PackageEditorState_AddPads::entry() noexcept {
                                 LengthEditBase::Steps::drillDiameter(),
                                 "package_editor/add_pads/drill_diameter");
     edtDrillDiameter->setValue(mLastPad.getDrillDiameter());
+    edtDrillDiameter->addAction(cmd.drillIncrease.createAction(
+        edtDrillDiameter.get(), edtDrillDiameter.get(),
+        &PositiveLengthEdit::stepUp));
+    edtDrillDiameter->addAction(cmd.drillDecrease.createAction(
+        edtDrillDiameter.get(), edtDrillDiameter.get(),
+        &PositiveLengthEdit::stepDown));
     connect(edtDrillDiameter.get(), &UnsignedLengthEdit::valueChanged, this,
             &PackageEditorState_AddPads::drillDiameterEditValueChanged);
     mContext.commandToolBar.addWidget(std::move(edtDrillDiameter));
@@ -207,6 +221,14 @@ bool PackageEditorState_AddPads::exit() noexcept {
   return true;
 }
 
+QSet<EditorWidgetBase::Feature>
+    PackageEditorState_AddPads::getAvailableFeatures() const noexcept {
+  return {
+      EditorWidgetBase::Feature::Abort,
+      EditorWidgetBase::Feature::Rotate,
+  };
+}
+
 /*******************************************************************************
  *  Event Handlers
  ******************************************************************************/
@@ -236,21 +258,12 @@ bool PackageEditorState_AddPads::processGraphicsSceneLeftMouseButtonPressed(
 bool PackageEditorState_AddPads::processGraphicsSceneRightMouseButtonReleased(
     QGraphicsSceneMouseEvent& e) noexcept {
   Q_UNUSED(e);
-  return processRotateCcw();
+  return processRotate(Angle::deg90());
 }
 
-bool PackageEditorState_AddPads::processRotateCw() noexcept {
+bool PackageEditorState_AddPads::processRotate(const Angle& rotation) noexcept {
   if (mCurrentPad) {
-    mEditCmd->rotate(-Angle::deg90(), mCurrentPad->getPosition(), true);
-    return true;
-  } else {
-    return false;
-  }
-}
-
-bool PackageEditorState_AddPads::processRotateCcw() noexcept {
-  if (mCurrentPad) {
-    mEditCmd->rotate(Angle::deg90(), mCurrentPad->getPosition(), true);
+    mEditCmd->rotate(rotation, mCurrentPad->getPosition(), true);
     return true;
   } else {
     return false;

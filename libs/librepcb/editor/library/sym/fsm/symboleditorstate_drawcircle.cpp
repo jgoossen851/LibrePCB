@@ -23,6 +23,7 @@
 #include "symboleditorstate_drawcircle.h"
 
 #include "../../../cmd/cmdcircleedit.h"
+#include "../../../editorcommandset.h"
 #include "../../../widgets/graphicslayercombobox.h"
 #include "../../../widgets/graphicsview.h"
 #include "../../../widgets/unsignedlengthedit.h"
@@ -71,6 +72,7 @@ bool SymbolEditorState_DrawCircle::entry() noexcept {
   mContext.graphicsScene.setSelectionArea(QPainterPath());  // clear selection
 
   // populate command toolbar
+  EditorCommandSet& cmd = EditorCommandSet::instance();
   mContext.commandToolBar.addLabel(tr("Layer:"));
   std::unique_ptr<GraphicsLayerComboBox> layerComboBox(
       new GraphicsLayerComboBox());
@@ -86,6 +88,10 @@ bool SymbolEditorState_DrawCircle::entry() noexcept {
                           LengthEditBase::Steps::generic(),
                           "symbol_editor/draw_circle/line_width");
   edtLineWidth->setValue(mLastLineWidth);
+  edtLineWidth->addAction(cmd.lineWidthIncrease.createAction(
+      edtLineWidth.get(), edtLineWidth.get(), &UnsignedLengthEdit::stepUp));
+  edtLineWidth->addAction(cmd.lineWidthDecrease.createAction(
+      edtLineWidth.get(), edtLineWidth.get(), &UnsignedLengthEdit::stepDown));
   connect(edtLineWidth.get(), &UnsignedLengthEdit::valueChanged, this,
           &SymbolEditorState_DrawCircle::lineWidthEditValueChanged);
   mContext.commandToolBar.addWidget(std::move(edtLineWidth));
@@ -116,6 +122,13 @@ bool SymbolEditorState_DrawCircle::exit() noexcept {
 
   mContext.graphicsView.unsetCursor();
   return true;
+}
+
+QSet<EditorWidgetBase::Feature>
+    SymbolEditorState_DrawCircle::getAvailableFeatures() const noexcept {
+  return {
+      EditorWidgetBase::Feature::Abort,
+  };
 }
 
 /*******************************************************************************

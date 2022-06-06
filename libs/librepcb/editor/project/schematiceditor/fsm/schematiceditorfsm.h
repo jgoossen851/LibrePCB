@@ -31,6 +31,7 @@
  ******************************************************************************/
 namespace librepcb {
 
+class Angle;
 class Project;
 class Uuid;
 class Workspace;
@@ -40,11 +41,8 @@ namespace editor {
 class GraphicsView;
 class SchematicEditor;
 class SchematicEditorState;
+class ToolBarProxy;
 class UndoStack;
-
-namespace Ui {
-class SchematicEditor;
-}
 
 /*******************************************************************************
  *  Class SchematicEditorFsm
@@ -80,8 +78,8 @@ public:
     Workspace& workspace;
     Project& project;
     SchematicEditor& editor;
-    Ui::SchematicEditor& editorUi;
     GraphicsView& editorGraphicsView;
+    ToolBarProxy& commandToolBar;
     UndoStack& undoStack;
   };
 
@@ -108,10 +106,10 @@ public:
   bool processCut() noexcept;
   bool processCopy() noexcept;
   bool processPaste() noexcept;
-  bool processRotateCw() noexcept;
-  bool processRotateCcw() noexcept;
-  bool processMirror() noexcept;
+  bool processRotate(const Angle& rotation) noexcept;
+  bool processMirror(Qt::Orientation orientation) noexcept;
   bool processRemove() noexcept;
+  bool processEditProperties() noexcept;
   bool processKeyPressed(const QKeyEvent& e) noexcept;
   bool processKeyReleased(const QKeyEvent& e) noexcept;
   bool processGraphicsSceneMouseMoved(QGraphicsSceneMouseEvent& e) noexcept;

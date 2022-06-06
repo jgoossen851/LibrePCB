@@ -23,6 +23,7 @@
 #include "packageeditorstate_drawpolygonbase.h"
 
 #include "../../../cmd/cmdpolygonedit.h"
+#include "../../../editorcommandset.h"
 #include "../../../widgets/angleedit.h"
 #include "../../../widgets/graphicslayercombobox.h"
 #include "../../../widgets/graphicsview.h"
@@ -75,6 +76,7 @@ bool PackageEditorState_DrawPolygonBase::entry() noexcept {
   mContext.graphicsScene.setSelectionArea(QPainterPath());  // clear selection
 
   // populate command toolbar
+  EditorCommandSet& cmd = EditorCommandSet::instance();
   mContext.commandToolBar.addLabel(tr("Layer:"));
   std::unique_ptr<GraphicsLayerComboBox> layerComboBox(
       new GraphicsLayerComboBox());
@@ -90,6 +92,10 @@ bool PackageEditorState_DrawPolygonBase::entry() noexcept {
                           LengthEditBase::Steps::generic(),
                           "package_editor/draw_polygon/line_width");
   edtLineWidth->setValue(mLastLineWidth);
+  edtLineWidth->addAction(cmd.lineWidthIncrease.createAction(
+      edtLineWidth.get(), edtLineWidth.get(), &UnsignedLengthEdit::stepUp));
+  edtLineWidth->addAction(cmd.lineWidthDecrease.createAction(
+      edtLineWidth.get(), edtLineWidth.get(), &UnsignedLengthEdit::stepDown));
   connect(edtLineWidth.get(), &UnsignedLengthEdit::valueChanged, this,
           &PackageEditorState_DrawPolygonBase::lineWidthEditValueChanged);
   mContext.commandToolBar.addWidget(std::move(edtLineWidth));
@@ -135,6 +141,13 @@ bool PackageEditorState_DrawPolygonBase::exit() noexcept {
 
   mContext.graphicsView.unsetCursor();
   return true;
+}
+
+QSet<EditorWidgetBase::Feature>
+    PackageEditorState_DrawPolygonBase::getAvailableFeatures() const noexcept {
+  return {
+      EditorWidgetBase::Feature::Abort,
+  };
 }
 
 /*******************************************************************************

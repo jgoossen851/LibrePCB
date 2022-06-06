@@ -475,6 +475,8 @@ add_library(
   project/cmd/cmddeviceinstanceremove.h
   project/cmd/cmddragselectedboarditems.cpp
   project/cmd/cmddragselectedboarditems.h
+  project/cmd/cmddragselectedschematicitems.cpp
+  project/cmd/cmddragselectedschematicitems.h
   project/cmd/cmdflipselectedboarditems.cpp
   project/cmd/cmdflipselectedboarditems.h
   project/cmd/cmdfootprintstroketextadd.cpp
@@ -483,10 +485,6 @@ add_library(
   project/cmd/cmdfootprintstroketextremove.h
   project/cmd/cmdfootprintstroketextsreset.cpp
   project/cmd/cmdfootprintstroketextsreset.h
-  project/cmd/cmdmirrorselectedschematicitems.cpp
-  project/cmd/cmdmirrorselectedschematicitems.h
-  project/cmd/cmdmoveselectedschematicitems.cpp
-  project/cmd/cmdmoveselectedschematicitems.h
   project/cmd/cmdnetclassadd.cpp
   project/cmd/cmdnetclassadd.h
   project/cmd/cmdnetclassedit.cpp
@@ -523,8 +521,6 @@ add_library(
   project/cmd/cmdremoveunusednetsignals.h
   project/cmd/cmdreplacedevice.cpp
   project/cmd/cmdreplacedevice.h
-  project/cmd/cmdrotateselectedschematicitems.cpp
-  project/cmd/cmdrotateselectedschematicitems.h
   project/cmd/cmdschematicadd.cpp
   project/cmd/cmdschematicadd.h
   project/cmd/cmdschematicedit.cpp
